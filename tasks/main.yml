@@ -1,0 +1,28 @@
+---
+# tasks file for ansible-role-picrust
+
+- name: Installing biom-format package for python
+  pip:
+      name: biom-format
+
+- name: Get the picrust from GitHub repo
+  git:
+     repo: git://github.com/picrust/picrust.git
+     dest: "{{ ansible_env.PWD }}/software/picrust"
+
+
+- name: Downloading 16S_13_5_precalculated.tab.gz
+  get_url:
+      url: ftp://ftp.microbio.me/pub/picrust-references/picrust-1.0.0/16S_13_5_precalculated.tab.gz
+      dest: "{{ ansible_env.PWD }}/software/picrust/picrust/data/"
+
+- name: Downloading ko_13_5_precalculated.tab.gz
+  get_url: 
+    url: ftp://ftp.microbio.me/pub/picrust-references/picrust-1.0.0/ko_13_5_precalculated.tab.gz
+    dest: "{{ ansible_env.PWD }}/software/picrust/picrust/data/"
+
+- name: Run the setup script for picrust
+  command: python setup.py install
+  args:
+      chdir: "{{ ansible_env.PWD }}/software/picrust/"
+
