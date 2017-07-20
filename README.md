@@ -16,7 +16,7 @@ N/a
 Dependencies
 ------------
 
-- coadunate.devtools
+- [coadunate.devtools](https://galaxy.ansible.com/coadunate/devtools)
 
 Example Playbook
 ----------------
